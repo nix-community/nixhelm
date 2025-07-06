@@ -1,6 +1,6 @@
 {
   repo = "https://charts.bitnami.com/bitnami/";
   chart = "ghost";
-  version = "23.0.24";
-  chartHash = "sha256-UTQ3KmxNs0LjlQEvTGw0hPVS6tSOVPfopAGqdy6n4g4=";
+  version = "23.0.25";
+  chartHash = "sha256-xaDEnKeN4u6fA1iKUWVlvH7+w3IX09JiIXsJ/NPNHTQ=";
 }
