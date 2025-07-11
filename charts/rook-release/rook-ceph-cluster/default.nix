@@ -1,7 +1,7 @@
 {
   repo = "https://charts.rook.io/release/";
   chart = "rook-ceph-cluster";
-  version = "v1.17.5";
-  chartHash = "sha256-7Xixgp93Bk2p9JrIVywjlHq/UsT3FKPoq5cWT80i2jU=";
+  version = "v1.17.6";
+  chartHash = "sha256-E2d21wQM7JGDGNGaGhqlYsSERpK8fU/S14+miS2LDcE=";
   bogusVersion = true;
 }
