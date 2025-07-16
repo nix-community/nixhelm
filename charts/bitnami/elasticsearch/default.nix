@@ -1,6 +1,6 @@
 {
   repo = "https://charts.bitnami.com/bitnami/";
   chart = "elasticsearch";
-  version = "22.0.12";
-  chartHash = "sha256-tXv7s+OD7tMDYHh3FcDKWbaw5bnuI/GmTk+qlVEUpb0=";
+  version = "22.0.13";
+  chartHash = "sha256-1vBt1MHn4uH9b0Kcldmb8SMt4PlOEaPfdS1mdISD9UA=";
 }
