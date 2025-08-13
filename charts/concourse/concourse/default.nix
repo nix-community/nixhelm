@@ -1,6 +1,6 @@
 {
   repo = "https://concourse-charts.storage.googleapis.com/";
   chart = "concourse";
-  version = "18.2.0";
-  chartHash = "sha256-fFHPCuUhw/hShZpVpvmve+zxQdwE6dB15li+Zkp1oSs=";
+  version = "18.4.0";
+  chartHash = "sha256-f78NJfmHT6rONZzTD5VFG2SnuBDasJKY8mzQiZvDmK4=";
 }
