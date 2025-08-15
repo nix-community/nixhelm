@@ -1,6 +1,6 @@
 {
   repo = "https://mojo2600.github.io/pihole-kubernetes/";
   chart = "pihole";
-  version = "2.31.0";
-  chartHash = "sha256-r7LuPPOPPi/u6UgMUD17p4M4EWattVaTLzChU96VY/U=";
+  version = "2.34.0";
+  chartHash = "sha256-nhvifpDdM8MoxF43cJAi6o+il2BbHX+udVAvvm1PukM=";
 }
