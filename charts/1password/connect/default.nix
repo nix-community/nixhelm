@@ -1,6 +1,6 @@
 {
   repo = "https://1password.github.io/connect-helm-charts/";
   chart = "connect";
-  version = "2.0.3";
-  chartHash = "sha256-inerkJo2hvyceM7Hb2u9nyhgPiSn6SwTfjJw1h4PfJE=";
+  version = "2.0.4";
+  chartHash = "sha256-NtH2TA4rFaCGu4uGDFDzooGLD2OH8MS7zDsIK+QyNOc=";
 }
