@@ -1,6 +1,6 @@
 {
   repo = "https://kiali.org/helm-charts/";
   chart = "kiali-operator";
-  version = "2.16.0";
-  chartHash = "sha256-2maU7K5A3QjDD1nSIWrtkYbZTV3qhkfQ+Fvo9h3GHCw=";
+  version = "2.17.0";
+  chartHash = "sha256-KzK7C3XePyhkqBPO3yVxWl7AZ0SNPzBdQ/Z/0Ntw7VM=";
 }
