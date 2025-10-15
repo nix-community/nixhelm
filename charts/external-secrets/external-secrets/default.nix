@@ -1,6 +1,6 @@
 {
   repo = "https://charts.external-secrets.io/";
   chart = "external-secrets";
-  version = "0.20.2";
-  chartHash = "sha256-H3JIcDuJLiq8RNExmtq2xAcihQIx7p5SZ01Ctmtb8wk=";
+  version = "0.20.3";
+  chartHash = "sha256-uaaUQGOMN+P+3JmXj36icPbqp1tSnYVVPe+nO+2zgeA=";
 }
