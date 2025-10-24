@@ -1,6 +1,6 @@
 {
   repo = "https://argoproj.github.io/argo-helm/";
   chart = "argocd-image-updater";
-  version = "0.13.0";
-  chartHash = "sha256-cd77M1/lrNyx7pTTJL21UWOgzcvMMfvk9/cMUQ3j5sU=";
+  version = "0.14.0";
+  chartHash = "sha256-54hx+47PN/oPQnWKKKUF5rB9x59wq54Y+G+6Km8o5S8=";
 }
