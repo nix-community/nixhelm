@@ -1,6 +1,6 @@
 {
   repo = "https://oauth2-proxy.github.io/manifests/";
   chart = "oauth2-proxy";
-  version = "9.0.1";
-  chartHash = "sha256-UsOZIruYxVo7B96M3EIXLig4c6fF+UKx7tZDRLWdNhQ=";
+  version = "10.0.0";
+  chartHash = "sha256-EHg4+wG9JlUoupu/PLUTmXDIOfTWjJh81O8LLmtts/E=";
 }
