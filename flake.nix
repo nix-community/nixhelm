@@ -10,6 +10,7 @@
     nix-kube-generators.url = "github:farcaller/nix-kube-generators";
     poetry2nix.url = "github:nix-community/poetry2nix";
     poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, haumea, nixpkgs, flake-utils, nix-kube-generators, poetry2nix, ... }: {
