@@ -1,0 +1,9 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/stefanprodan/podinfo
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 80
