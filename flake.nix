@@ -37,6 +37,8 @@
     {
       chartsDerivations = self.charts { inherit pkgs; };
 
+      formatter = pkgs.nixfmt-tree;
+
       packages.helmupdater = mkPoetryApplication {
         python = pkgs.python312;
         projectDir = ./.;
@@ -44,7 +46,7 @@
 
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
-          nixpkgs-fmt
+          nixfmt-tree
           poetry
           python310Packages.autopep8
           (mkPoetryEnv {
