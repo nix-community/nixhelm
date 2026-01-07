@@ -3,14 +3,33 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    flake-utils.url = "github:numtide/flake-utils";
+
     haumea = {
       url = "github:nix-community/haumea/v0.2.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nix-kube-generators.url = "github:farcaller/nix-kube-generators";
-    poetry2nix.url = "github:nix-community/poetry2nix";
-    poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
-    flake-utils.url = "github:numtide/flake-utils";
+
+    pyproject-nix = {
+      url = "github:pyproject-nix/pyproject.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    uv2nix = {
+      url = "github:pyproject-nix/uv2nix";
+      inputs.pyproject-nix.follows = "pyproject-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    pyproject-build-systems = {
+      url = "github:pyproject-nix/build-system-pkgs";
+      inputs.pyproject-nix.follows = "pyproject-nix";
+      inputs.uv2nix.follows = "uv2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -20,7 +39,9 @@
       nixpkgs,
       flake-utils,
       nix-kube-generators,
-      poetry2nix,
+      pyproject-nix,
+      uv2nix,
+      pyproject-build-systems,
       ...
     }:
     {
@@ -45,32 +66,71 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryEnv mkPoetryApplication;
+
+        python = pkgs.python314;
+        workspace = uv2nix.lib.workspace.loadWorkspace { workspaceRoot = ./.; };
+        pythonBase = pkgs.callPackage pyproject-nix.build.packages { inherit python; };
+        overlay = workspace.mkPyprojectOverlay {
+          sourcePreference = "wheel";
+        };
+        pythonSet = pythonBase.overrideScope (
+          pkgs.lib.composeManyExtensions [
+            pyproject-build-systems.overlays.default
+            overlay
+          ]
+        );
+
+        virtualenv = pythonSet.mkVirtualEnv "nixhelm-venv" workspace.deps.default;
       in
       {
         chartsDerivations = self.charts { inherit pkgs; };
 
+        packages = {
+          helmupdater = virtualenv;
+          default = self.packages.${system}.helmupdater;
+        };
+
+        apps = {
+          helmupdater = {
+            type = "app";
+            program = "${self.packages.${system}.helmupdater}/bin/helmupdater";
+          };
+
+          default = self.apps.${system}.helmupdater;
+        };
+
         formatter = pkgs.nixfmt-tree;
 
-        packages.helmupdater = mkPoetryApplication {
-          python = pkgs.python312;
-          projectDir = ./.;
-        };
+        devShell =
+          let
+            editableOverlay = workspace.mkEditablePyprojectOverlay {
+              root = "$REPO_ROOT";
+            };
+            editablePythonSet = pythonSet.overrideScope editableOverlay;
+            devVirtualenv = editablePythonSet.mkVirtualEnv "nixhelm-dev-venv" workspace.deps.all;
+          in
+          pkgs.mkShell {
+            packages = [
+              devVirtualenv
+              pkgs.nixfmt-tree
+              pkgs.uv
+              pkgs.ruff
+              pkgs.kubernetes-helm
+              pkgs.crane
+              pkgs.curl
+            ];
 
-        devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            nixfmt-tree
-            poetry
-            python310Packages.autopep8
-            (mkPoetryEnv {
-              python = pkgs.python312;
-              projectDir = ./.;
-              editablePackageSources = {
-                manager = ./.;
-              };
-            })
-          ];
-        };
+            env = {
+              UV_NO_SYNC = "1";
+              UV_PYTHON = editablePythonSet.python.interpreter;
+              UV_PYTHON_DOWNLOADS = "never";
+            };
+
+            shellHook = ''
+              unset PYTHONPATH
+              export REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")
+            '';
+          };
       }
     );
 }

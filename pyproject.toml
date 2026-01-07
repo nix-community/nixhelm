@@ -1,22 +1,23 @@
-[tool.poetry]
+[project]
 name = "helmupdater"
 version = "0.1.0"
 description = ""
-authors = ["Vladimir Pouzanov <farcaller@gmail.com>"]
+authors = [{ name = "Vladimir Pouzanov", email = "farcaller@gmail.com" }]
+requires-python = ">=3.10,<4"
+dependencies = [
+    "requests>=2.28.2,<3",
+    "typer>=0.7.0,<0.8",
+    "pyyaml>=6.0,<7",
+    "semver>=2.13.0,<3",
+    "chevron>=0.14.0,<0.15",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-requests = "^2.28.2"
-typer = "^0.7.0"
-pyyaml = "^6.0"
-semver = "^2.13.0"
-chevron = "^0.14.0"
+[project.scripts]
+helmupdater = "helmupdater:app"
 
-[tool.poetry.dev-dependencies]
+[dependency-groups]
+dev = []
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
-helmupdater = "helmupdater:app"
+requires = ["hatchling", "editables"]
+build-backend = "hatchling.build"
