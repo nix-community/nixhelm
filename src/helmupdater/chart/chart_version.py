@@ -1,8 +1,8 @@
 # # Used for a forward reference in ChartVersion
 from __future__ import annotations
 
+from packaging.version import Version
 from pydantic import BaseModel, ConfigDict, computed_field
-from semver import Version, VersionInfo
 
 
 class ChartVersion(BaseModel):
@@ -18,10 +18,7 @@ class ChartVersion(BaseModel):
     @property
     def version_info(self) -> Version:
         """Parse the semantic version, handling optional 'v' prefix."""
-        version = self.version
-        if version.startswith("v"):
-            version = version[1:]
-        return VersionInfo.parse(version)
+        return Version(self.version)
 
     def _ensure_comparable(self, other: object) -> ChartVersion:
         if not isinstance(other, ChartVersion):

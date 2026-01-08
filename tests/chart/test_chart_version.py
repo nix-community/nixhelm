@@ -14,7 +14,7 @@ class TestChartVersion:
         assert str(chart_version) == version_str
         assert chart_version.version_info.major == 1
         assert chart_version.version_info.minor == 2
-        assert chart_version.version_info.patch == 3
+        assert chart_version.version_info.micro == 3
 
     def test_parsing_with_v_prefix(self):
         version_str = "v1.2.3"
@@ -24,7 +24,7 @@ class TestChartVersion:
         assert str(chart_version) == version_str
         assert chart_version.version_info.major == 1
         assert chart_version.version_info.minor == 2
-        assert chart_version.version_info.patch == 3
+        assert chart_version.version_info.micro == 3
 
     def test_comparison_compatibility(self):
         nginx_version = ChartVersion(version="1.0.0", repo="repo", chart="nginx")
@@ -46,3 +46,9 @@ class TestChartVersion:
         ]
         latest = max(versions)
         assert str(latest) == "v3.0.0"
+
+    def test_odd_versions(self):
+        def parsed_version(version: str):
+            return ChartVersion(version=version, repo="repo", chart="nginx").version_info
+
+        assert str(parsed_version("0.42.00")) == "0.42.0"
