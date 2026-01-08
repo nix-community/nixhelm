@@ -38,6 +38,7 @@ def commit(message: str) -> None:
 def add_and_commit(file_path: Path | str, message: str) -> None:
     """
     Stage and commit file in one operation.
+    Only commits if file has changes.
 
     Args:
         file_path: Path to file to stage
@@ -52,6 +53,9 @@ def add_and_commit(file_path: Path | str, message: str) -> None:
         ...     "local/nginx: update to 1.0.1"
         ... )
     """
+    if not has_changes(file_path):
+        print(f"no changes in {file_path}")
+        return
     add_file(file_path)
     commit(message)
 
@@ -96,3 +100,23 @@ def staged_file(file_path: Path | str):
         yield file_path
     finally:
         reset(file_path)
+
+
+def has_changes(file_path: Path | str) -> bool:
+    """
+    Check if file has unstaged changes.
+
+    Args:
+        file_path: Path to file to check
+
+    Returns:
+        True if file has changes, False otherwise
+
+    Examples:
+        >>> has_changes("charts/local/nginx/default.nix")
+        True
+    """
+    result = run_cmd(
+        "git", "diff", "--quiet", "--exit-code", str(file_path), raise_on_error=False
+    )
+    return result.returncode != 0
