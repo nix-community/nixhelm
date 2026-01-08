@@ -41,6 +41,6 @@ jobs:
             if [[ "$CHANGED_FILE" =~ charts/(.+/.+)/default.nix$ ]]; then
               CHART="${BASH_REMATCH[1]}"
               echo "rebuilding for $CHART"
-              nix run .#helmupdater -- update "$CHART" --commit --rebuild
+              nix run .#helmupdater -- build "$CHART"
             fi
           done
