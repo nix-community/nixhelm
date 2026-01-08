@@ -3,6 +3,7 @@ name = "helmupdater"
 version = "0.2.0"
 description = ""
 authors = [{ name = "Vladimir Pouzanov", email = "farcaller@gmail.com" }]
+maintainers = [{ name = "Damon River", email = "damonriver@fastmail.com" }]
 
 requires-python = ">=3.14,<4.0"
 dependencies = [
