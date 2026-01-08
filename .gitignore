@@ -1,1 +1,4 @@
 result
+
+__pycache__
+.coverage
