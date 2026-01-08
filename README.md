@@ -1,11 +1,13 @@
 # nixhelm
 
-This is a collection of helm charts in a nix-digestable format.
+This is a collection of helm charts in a nix-digestible format.
 
-## Supported chart repoitories
+## Supported chart repositories
 
-Nixhelm supports only the traditional helm chart repos (served over http[s]).
-The support for OCI charts is [pending](https://github.com/farcaller/nixhelm/issues/1).
+Nixhelm supports both traditional HTTP helm chart repositories and OCI-compliant registries:
+
+- **HTTP/HTTPS repositories** (ChartMuseum, traditional Helm repos)
+- **OCI registries** (GitHub Container Registry, Docker Hub, Harbor, etc.)
 
 If your chart is hosted in a git repo, remember that you can fetch it as a flake
 input and pass to `buildHelmChart` [directly](https://github.com/farcaller/nixhelm/issues/10).
@@ -86,15 +88,23 @@ Clone the repository and run the following command from within it:
 nix run .#helmupdater -- init $REPO $REPO_NAME/$CHART_NAME --commit
 ```
 
-Where `REPO` is the url to the chart, `REPO_NAME` is the short name for the
+Where `REPO` is the URL to the chart repository, `REPO_NAME` is the short name for the
 repository and the `CHART_NAME` is the name of the chart in the repository.
 
-For example, if you want to add [bitnami's
-nginx](https://github.com/bitnami/charts/tree/main/bitnami/nginx), run the
-following command:
+### HTTP Repository Example
+
+If you want to add [prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus):
 
 ```sh
-nix run .#helmupdater -- init "https://charts.bitnami.com/bitnami" bitnami/nginx --commit
+nix run .#helmupdater -- init "https://prometheus-community.github.io/helm-charts" prometheus-community/prometheus --commit
+```
+
+### OCI Registry Example
+
+For charts hosted in OCI registries, use the `oci://` scheme:
+
+```sh
+nix run .#helmupdater -- init "oci://ghcr.io/myorg/charts" myorg/nginx --commit
 ```
 
 The command will create the properly formatted commit that you can then submit

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: nginx
+description: A minimal test Helm chart for integration testing
+type: application
+version: "1.0.1"
+appVersion: "1.0"

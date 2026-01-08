@@ -1,0 +1,27 @@
+server:
+  addr: ":5000"
+
+token:
+  issuer: "oauth2-server"
+  expiration: 900
+  certificate: "/certs/server.pem"
+  key: "/certs/server-key.pem"
+  disable_legacy_key_id: true
+
+users:
+  # testuser:testpass
+  testuser:
+    password: "$2y$05$Xv/mStssZ7U8Gi4vVqxpkOOIlLSgRQSvv.JkJVD1WHDkj8pT05cJC"
+  # Anonymous user - no credentials required
+  "": {}
+
+acl:
+  - match: {account: "testuser"}
+    actions: ["*"]
+    comment: "Logged in user"
+  - match: {account: "", type: "registry", name: "catalog"}
+    actions: ["*"]
+    comment: "Anonymous can query the catalog"
+  - match: {account: ""}
+    actions: ["pull"]
+    comment: "Anonymous read only access"

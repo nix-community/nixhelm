@@ -1,22 +1,42 @@
-[tool.poetry]
+[project]
 name = "helmupdater"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
-authors = ["Vladimir Pouzanov <farcaller@gmail.com>"]
+authors = [{ name = "Vladimir Pouzanov", email = "farcaller@gmail.com" }]
+maintainers = [{ name = "Damon River", email = "damonriver@fastmail.com" }]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-requests = "^2.28.2"
-typer = "^0.7.0"
-pyyaml = "^6.0"
-semver = "^2.13.0"
-chevron = "^0.14.0"
+requires-python = ">=3.14,<4.0"
+dependencies = [
+  "chevron>=0.14.0,<0.15.0",
+  "oras>=0.2.26,<0.3",
+  "pydantic>=2.12.5",
+  "pyyaml>=6.0,<7.0",
+  "requests>=2.32.2,<3.0",
+  "semver>=3.0.4,<3.1",
+  "typer>=0.20,<0.21",
+]
 
-[tool.poetry.dev-dependencies]
+[dependency-groups]
+dev = ["ty>=0.0.2"]
+test = ["pytest>=7.0,<8.0", "pytest-cov>=4.0,<5.0"]
+
+[project.scripts]
+helmupdater = "helmupdater.cli:app"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "editables"]
+build-backend = "hatchling.build"
 
-[tool.poetry.scripts]
-helmupdater = "helmupdater:app"
+[tool.pytest.ini_options]
+markers = ["e2e: end-to-end tests that require external services"]
+addopts = ["--import-mode=importlib", "-m", "not e2e"]
+pythonpath = [".", "src"]
+
+[tool.ruff.lint]
+select = [
+  "E",  # pycodestyle
+  "F",  # Pyflakes
+  "I",  # isort
+  "B",  # flake8-bugbear
+  "UP", # pyupgrade
+]

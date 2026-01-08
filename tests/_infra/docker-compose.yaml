@@ -1,0 +1,61 @@
+services:
+  # HTTP Helm Chart Registry
+  http-registry:
+    image: ghcr.io/helm/chartmuseum:v0.16.2
+    ports:
+      - "45010:8080"
+    environment:
+      DEBUG: "1"
+      STORAGE: local
+      STORAGE_LOCAL_ROOTDIR: /tmp/charts
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 3s
+      timeout: 1s
+      retries: 3
+
+  # OCI Registry with authentication
+  oci-registry:
+    image: registry:3
+    ports:
+      - "45020:5000"
+      - "45021:5001"
+    volumes:
+      - ./oauth2-server/certs:/certs:ro
+    environment:
+      REGISTRY_AUTH: token
+      REGISTRY_AUTH_TOKEN_REALM: http://localhost:45030/auth
+      REGISTRY_AUTH_TOKEN_SERVICE: oci-registry
+      REGISTRY_AUTH_TOKEN_ISSUER: oauth2-server
+      REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE: /certs/server.pem
+      REGISTRY_HEALTH_STORAGEDRIVER_ENABLED: "false"
+      OTEL_TRACES_EXPORTER: "none"
+      OTEL_LOGS_EXPORTER: "none"
+      OTEL_METRICS_EXPORTER: "none"
+      REGISTRY_LOG_LEVEL: debug
+    depends_on:
+      oauth2-server:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5001/debug/health"]
+      interval: 3s
+      timeout: 1s
+      retries: 3
+
+  # OAuth2 Token Server for OCI Registry
+  oauth2-server:
+    image: cesanta/docker_auth:1.14.0
+    ports:
+      - "45030:5000"
+    volumes:
+      - ./oauth2-server/auth-config.yml:/config/auth_config.yml:ro
+      - ./oauth2-server/certs:/certs:ro
+    command:
+      - "--v=5"
+      - "-logtostderr"
+      - /config/auth_config.yml
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5000/"]
+      interval: 3s
+      timeout: 1s
+      retries: 3

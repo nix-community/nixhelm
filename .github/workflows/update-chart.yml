@@ -1,10 +1,15 @@
-name: rebuild-cache
+name: update-chart
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      chart_name:
+        description: 'Chart name in format "repo/chart" (e.g., "prometheus-community/prometheus")'
+        required: true
+        type: string
 permissions:
   contents: write
 jobs:
-  rebuild-cache:
+  update-chart:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -18,7 +23,9 @@ jobs:
         with:
           name: nixhelm
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Check for updates
-        run: nix run .#helmupdater -- update-all --commit --build
+      - name: Update chart
+        run: |
+          echo "Updating chart: ${{ inputs.chart_name }}"
+          nix run .#helmupdater -- update "${{ inputs.chart_name }}" --commit --build
       - name: Push updates
         run: git push
