@@ -1,6 +1,6 @@
 [project]
 name = "helmupdater"
-version = "0.2.1"
+version = "0.2.2"
 description = ""
 authors = [{ name = "Vladimir Pouzanov", email = "farcaller@gmail.com" }]
 maintainers = [{ name = "Damon River", email = "damonriver@fastmail.com" }]
@@ -9,10 +9,10 @@ requires-python = ">=3.14,<4.0"
 dependencies = [
   "chevron>=0.14.0,<0.15.0",
   "oras>=0.2.26,<0.3",
+  "packaging>=25.0",
   "pydantic>=2.12.5",
   "pyyaml>=6.0,<7.0",
   "requests>=2.32.2,<3.0",
-  "semver>=3.0.4,<3.1",
   "typer>=0.20,<0.21",
 ]
 

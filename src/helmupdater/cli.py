@@ -101,7 +101,7 @@ def update_all(
                         f"{repo_name}/{chart_name}: update to {chart_info.version}",
                     )
 
-            except RuntimeError as e:
+            except Exception as e:
                 print(f"failed to update chart: {e}")
 
 

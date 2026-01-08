@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-01-08
 
+### helmupdater 0.2.2
+
+#### Fixed
+
+- Fixed chart version parsing.
+- Fixed exception handling in `update-all` command.
+
+#### Changed
+
+- Changed chart version parsing from `semver` to `packaging.version` as it is more permissive.
+
 ### helmupdater 0.2.1
 
 #### Fixed
