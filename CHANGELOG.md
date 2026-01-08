@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-01-08
 
+### helmupdater 0.2.1
+
+#### Fixed
+
+- Fixed an error with running "git commit" on no changes. Now empty changes are skipped.
+
 ### General
 
 #### Added
