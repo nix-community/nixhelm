@@ -1,0 +1,31 @@
+name: update-chart
+on:
+  workflow_dispatch:
+    inputs:
+      chart_name:
+        description: 'Chart name in format "repo/chart" (e.g., "prometheus-community/prometheus")'
+        required: true
+        type: string
+permissions:
+  contents: write
+jobs:
+  update-chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: fregante/setup-git-user@v2
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: 'experimental-features = nix-command flakes'
+          nix_path: nixpkgs=channel:nixos-unstable
+      - uses: cachix/cachix-action@v16
+        with:
+          name: nixhelm
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Update chart
+        run: |
+          echo "Updating chart: ${{ inputs.chart_name }}"
+          nix run .#helmupdater -- update "${{ inputs.chart_name }}" --commit --build
+      - name: Push updates
+        run: git push
