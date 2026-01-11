@@ -207,8 +207,11 @@ def update(
 
     latest_version = max(available_versions)
 
-    if current_version >= latest_version:
+    if current_version == latest_version:
         return chart_info
+
+    if current_version > latest_version:
+        print("performing version downgrade")
 
     print(f"updating {current_version} -> {latest_version}")
 
