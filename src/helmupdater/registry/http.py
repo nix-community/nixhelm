@@ -3,7 +3,7 @@
 import requests
 import yaml
 
-from helmupdater.chart.chart_version import ChartVersion
+from helmupdater.chart.chart_version import ChartVersion, parse_versions
 
 
 class HTTPRegistry:
@@ -37,11 +37,12 @@ class HTTPRegistry:
             chart_name: Name of the Helm chart
 
         Returns:
-            List of available chart versions sorted by registry order
+            List of available chart versions
 
         Raises:
             requests.exceptions.ConnectionError: If registry is unreachable
-            KeyError: If chart is not found in index.yaml
+            ValueError: If chart is not found in index.yaml
+            ValueError: If all version entries fail parsing
         """
         response = requests.get(
             f"{self.base_url}index.yaml",
@@ -54,10 +55,13 @@ class HTTPRegistry:
         if chart_entries is None:
             raise ValueError(f"Chart {chart_name} is not found in the repo.")
 
-        return [
-            ChartVersion(version=entry["version"], repo=self.name, chart=chart_name)
-            for entry in chart_entries
-        ]
+        versions_raw = [entry["version"] for entry in chart_entries]
+        versions = parse_versions(
+            versions_raw,
+            repo_name=self.name,
+            chart_name=chart_name,
+        )
+        return versions
 
     @property
     def registry_type(self) -> str:

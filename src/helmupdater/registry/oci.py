@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 
 from oras.client import OrasClient
 
-from helmupdater.chart.chart_version import ChartVersion
+from helmupdater.chart.chart_version import ChartVersion, parse_versions
 
 
 @contextmanager
@@ -74,6 +74,7 @@ class OCIRegistry:
 
         Raises:
             ValueError: If request fails or chart is not found
+            ValueError: If all version entries fail parsing
         """
 
         # Re-initializing client here since with "token" auth it needs to retrieve new
@@ -86,9 +87,12 @@ class OCIRegistry:
         with _timeout(self.timeout):
             tags = registry_client.get_tags(repository)
 
-        return [
-            ChartVersion(version=tag, repo=self.name, chart=chart_name) for tag in tags
-        ]
+        versions = parse_versions(
+            tags,
+            repo_name=self.name,
+            chart_name=chart_name,
+        )
+        return versions
 
     @property
     def registry_type(self) -> str:

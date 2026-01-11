@@ -1,6 +1,7 @@
 import pytest
+from pydantic import ValidationError
 
-from helmupdater.chart import ChartVersion
+from helmupdater.chart.chart_version import ChartVersion, parse_versions
 
 
 class TestChartVersion:
@@ -49,6 +50,46 @@ class TestChartVersion:
 
     def test_odd_versions(self):
         def parsed_version(version: str):
-            return ChartVersion(version=version, repo="repo", chart="nginx").version_info
+            return ChartVersion(
+                version=version, repo="repo", chart="nginx"
+            ).version_info
 
         assert str(parsed_version("0.42.00")) == "0.42.0"
+
+    def test_invalid_version(self):
+        with pytest.raises(ValidationError):
+            ChartVersion(version="invalid", repo="repo", chart="chart")
+
+
+class TestParseVersions:
+    """Test parse_versions function."""
+
+    def test_parse_empty_list(self):
+        """Empty list should return empty list."""
+        result = parse_versions([], repo_name="repo", chart_name="chart")
+        assert result == []
+
+    def test_parse_valid_versions(self):
+        versions_raw = [
+            "1.0.0",
+            "v1.0.0",
+            "1.1.0-alpha",
+            "2.0.0",
+            "2.1.0-beta",
+            "3.0.0-dev1",
+            "4.0.0rc1",
+        ]
+        result = parse_versions(versions_raw, repo_name="repo", chart_name="chart")
+        assert len(result) == len(versions_raw)
+
+    def test_parse_all_invalid_version(self):
+        versions_raw = ["invalid1", "invalid2"]
+        with pytest.raises(ValueError):
+            parse_versions(versions_raw, repo_name="repo", chart_name="chart")
+
+    def test_parse_skip_invalid_versions(self):
+        versions_raw = ["invalid1", "1.0.0", "invalid2"]
+        result = parse_versions(versions_raw, repo_name="repo", chart_name="chart")
+
+        assert len(result) == 1
+        assert result[0].version == "1.0.0"
