@@ -39,6 +39,10 @@ class ChartVersion(BaseModel):
         """Parse the semantic version, handling optional 'v' prefix."""
         return Version(self.version)
 
+    @property
+    def is_stable(self):
+        return not (self.version_info.is_prerelease or self.version_info.is_devrelease)
+
     def _ensure_comparable(self, other: object) -> ChartVersion:
         if not isinstance(other, ChartVersion):
             raise TypeError(f"Cannot compare ChartVersion with {type(other).__name__}")

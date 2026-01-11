@@ -60,6 +60,36 @@ class TestChartVersion:
         with pytest.raises(ValidationError):
             ChartVersion(version="invalid", repo="repo", chart="chart")
 
+    def test_is_stable_for_stable_versions(self):
+        """Stable versions should return True."""
+        stable_versions = [
+            ChartVersion(version="1.0.0", repo="repo", chart="nginx"),
+            ChartVersion(version="2.3.4", repo="repo", chart="nginx"),
+            ChartVersion(version="v1.0.0", repo="repo", chart="nginx"),
+        ]
+        for v in stable_versions:
+            assert v.is_stable is True
+
+    def test_is_stable_for_prereleases(self):
+        """Prerelease versions should return False."""
+        prerelease_versions = [
+            ChartVersion(version="1.0.0-alpha", repo="repo", chart="nginx"),
+            ChartVersion(version="1.0.0-beta.1", repo="repo", chart="nginx"),
+            ChartVersion(version="1.0.0-rc1", repo="repo", chart="nginx"),
+            ChartVersion(version="2.0.0-alpha.2", repo="repo", chart="nginx"),
+        ]
+        for v in prerelease_versions:
+            assert v.is_stable is False
+
+    def test_is_stable_for_dev_releases(self):
+        """Dev releases should return False."""
+        dev_versions = [
+            ChartVersion(version="1.0.0.dev1", repo="repo", chart="nginx"),
+            ChartVersion(version="1.0.0.dev20", repo="repo", chart="nginx"),
+        ]
+        for v in dev_versions:
+            assert v.is_stable is False
+
 
 class TestParseVersions:
     """Test parse_versions function."""

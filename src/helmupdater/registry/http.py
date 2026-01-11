@@ -61,7 +61,7 @@ class HTTPRegistry:
             repo_name=self.name,
             chart_name=chart_name,
         )
-        return versions
+        return [v for v in versions if v.is_stable]
 
     @property
     def registry_type(self) -> str:
