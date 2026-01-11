@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-01-11
+
+### helmupdater 0.2.3
+
+#### Changed
+
+- Changed version parsing in `registry.get_versions()`:
+  - Now skips invalid version strings during parsing and raises an error if all versions are invalid.
+  - Filters out prerelease versions (alpha, beta, rc, dev) - only stable releases are returned.
+- Changed version handling in `chart.update()` - now updates to the latest stable version only:
+  - If the current version is higher than the latest available stable version, it will be downgraded.
+  - This handles "yanked" versions and prevents prerelease versions from being selected.
+
 ## 2026-01-08
 
 ### helmupdater 0.2.2
