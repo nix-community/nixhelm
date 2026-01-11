@@ -62,9 +62,34 @@ class OCIRegistry:
 
         self.options = options
 
+    def _fetch_raw_versions(self, chart_name: str) -> list[str]:
+        """
+        Fetch raw version tags from OCI registry.
+
+        Args:
+            chart_name: Name of the Helm chart
+
+        Returns:
+            List of version strings
+
+        Raises:
+            ValueError: If request fails or chart is not found
+        """
+        # Re-initializing client here since with "token" auth it needs to retrieve new
+        # token for each repository individually.
+        registry_client = OrasClient(hostname=self.registry_host, **self.options)
+
+        repository = f"{self.repository_path}/{chart_name}"
+        # Oras does not expose retries/timeout settings. It also uses exponential
+        # backoff. Hardcoding timeout wrapper to have at least some control over it.
+        with _timeout(self.timeout):
+            tags = registry_client.get_tags(repository)
+
+        return tags
+
     def get_versions(self, chart_name: str) -> list[ChartVersion]:
         """
-        List tags (versions) from OCI registry.
+        List versions from OCI registry.
 
         Args:
             chart_name: Name of the Helm chart
@@ -76,17 +101,7 @@ class OCIRegistry:
             ValueError: If request fails or chart is not found
             ValueError: If all version entries fail parsing
         """
-
-        # Re-initializing client here since with "token" auth it needs to retrieve new
-        # token for each repository individually.
-        registry_client = OrasClient(hostname=self.registry_host, **self.options)
-
-        repository = f"{self.repository_path}/{chart_name}"
-        # Oras does not expose retries/timeout settings. It also uses exponential
-        # backoff. Hardcoding timeout wrapper to have at least some control over it.
-        with _timeout(self.timeout):
-            tags = registry_client.get_tags(repository)
-
+        tags = self._fetch_raw_versions(chart_name)
         versions = parse_versions(
             tags,
             repo_name=self.name,

@@ -29,6 +29,32 @@ class HTTPRegistry:
         self.name = name
         self.timeout = timeout
 
+    def _fetch_raw_versions(self, chart_name: str) -> list[str]:
+        """
+        Fetch raw version strings from index.yaml.
+
+        Args:
+            chart_name: Name of the Helm chart
+
+        Returns:
+            List of raw version strings
+
+        Raises:
+            ValueError: If chart is not found in index.yaml
+        """
+        response = requests.get(
+            f"{self.base_url}index.yaml",
+            timeout=self.timeout,
+        )
+        response.encoding = "utf8"
+        index = yaml.safe_load(response.text)
+
+        chart_entries = index.get("entries", {}).get(chart_name)
+        if chart_entries is None:
+            raise ValueError(f"Chart {chart_name} is not found in the repo.")
+
+        return [entry["version"] for entry in chart_entries]
+
     def get_versions(self, chart_name: str) -> list[ChartVersion]:
         """
         Fetch index.yaml and extract all versions for a chart.
@@ -44,18 +70,7 @@ class HTTPRegistry:
             ValueError: If chart is not found in index.yaml
             ValueError: If all version entries fail parsing
         """
-        response = requests.get(
-            f"{self.base_url}index.yaml",
-            timeout=self.timeout,
-        )
-        response.encoding = "utf8"
-        index = yaml.safe_load(response.text)
-
-        chart_entries = index.get("entries", {}).get(chart_name)
-        if chart_entries is None:
-            raise ValueError(f"Chart {chart_name} is not found in the repo.")
-
-        versions_raw = [entry["version"] for entry in chart_entries]
+        versions_raw = self._fetch_raw_versions(chart_name)
         versions = parse_versions(
             versions_raw,
             repo_name=self.name,
