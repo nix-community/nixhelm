@@ -1,8 +1,15 @@
 # # Used for a forward reference in ChartVersion
 from __future__ import annotations
 
-from packaging.version import Version
-from pydantic import BaseModel, ConfigDict, computed_field
+from functools import cached_property
+
+from packaging.version import InvalidVersion, Version
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    ValidationError,
+    model_validator,
+)
 
 
 class ChartVersion(BaseModel):
@@ -14,11 +21,27 @@ class ChartVersion(BaseModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True, frozen=True)
 
-    @computed_field
-    @property
+    @model_validator(mode="after")
+    def validate_version_parsable(self) -> ChartVersion:
+        """Validate that version can be parsed at instantiation time."""
+        try:
+            # Access version_info to trigger parsing validation
+            _ = self.version_info
+        except InvalidVersion as e:
+            raise ValueError(
+                f"Invalid version string '{self.version}' for chart "
+                f"{self.repo}/{self.chart}"
+            ) from e
+        return self
+
+    @cached_property
     def version_info(self) -> Version:
         """Parse the semantic version, handling optional 'v' prefix."""
         return Version(self.version)
+
+    @property
+    def is_stable(self):
+        return not (self.version_info.is_prerelease or self.version_info.is_devrelease)
 
     def _ensure_comparable(self, other: object) -> ChartVersion:
         if not isinstance(other, ChartVersion):
@@ -55,3 +78,29 @@ class ChartVersion(BaseModel):
     def __str__(self) -> str:
         """Return string representation."""
         return self.version
+
+
+def parse_versions(
+    versions_raw: list,
+    repo_name: str,
+    chart_name: str,
+) -> list[ChartVersion]:
+    if not versions_raw:
+        return []
+
+    result: list[ChartVersion] = []
+    for version_raw in versions_raw:
+        try:
+            chart_version = ChartVersion(
+                version=version_raw, repo=repo_name, chart=chart_name
+            )
+            result.append(chart_version)
+        except ValidationError:
+            pass
+
+    if len(result) == 0:
+        raise ValueError(
+            f"All version entries failed parsing for chart {repo_name}/{chart_name}."
+        )
+
+    return result

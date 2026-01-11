@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 
 from oras.client import OrasClient
 
-from helmupdater.chart.chart_version import ChartVersion
+from helmupdater.chart.chart_version import ChartVersion, parse_versions
 
 
 @contextmanager
@@ -62,20 +62,19 @@ class OCIRegistry:
 
         self.options = options
 
-    def get_versions(self, chart_name: str) -> list[ChartVersion]:
+    def _fetch_raw_versions(self, chart_name: str) -> list[str]:
         """
-        List tags (versions) from OCI registry.
+        Fetch raw version tags from OCI registry.
 
         Args:
             chart_name: Name of the Helm chart
 
         Returns:
-            List of available chart versions
+            List of version strings
 
         Raises:
             ValueError: If request fails or chart is not found
         """
-
         # Re-initializing client here since with "token" auth it needs to retrieve new
         # token for each repository individually.
         registry_client = OrasClient(hostname=self.registry_host, **self.options)
@@ -86,9 +85,29 @@ class OCIRegistry:
         with _timeout(self.timeout):
             tags = registry_client.get_tags(repository)
 
-        return [
-            ChartVersion(version=tag, repo=self.name, chart=chart_name) for tag in tags
-        ]
+        return tags
+
+    def get_versions(self, chart_name: str) -> list[ChartVersion]:
+        """
+        List versions from OCI registry.
+
+        Args:
+            chart_name: Name of the Helm chart
+
+        Returns:
+            List of available chart versions
+
+        Raises:
+            ValueError: If request fails or chart is not found
+            ValueError: If all version entries fail parsing
+        """
+        tags = self._fetch_raw_versions(chart_name)
+        versions = parse_versions(
+            tags,
+            repo_name=self.name,
+            chart_name=chart_name,
+        )
+        return [v for v in versions if v.is_stable]
 
     @property
     def registry_type(self) -> str:

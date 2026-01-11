@@ -5,6 +5,8 @@ Tests require the local registry to be running:
     tests/_infra/setup.sh
 """
 
+from unittest.mock import patch
+
 import pytest
 
 from helmupdater.registry import OCIRegistry
@@ -48,3 +50,23 @@ class TestOCIRegistry:
     def test_get_versions_nonexistent(self, oci_registry):
         with pytest.raises(ValueError):
             oci_registry.get_versions("nonexistent")
+
+    @patch.object(OCIRegistry, "_fetch_raw_versions")
+    def test_get_versions_filters_unstable(self, mock_fetch_raw_versions):
+        """Test that get_versions returns only stable versions."""
+        registry = OCIRegistry("oci://example.com/charts", "test")
+
+        mixed_versions = [
+            "1.0.0",
+            "1.1.0-alpha",
+            "1.2.0-beta.1",
+            "2.0.0",
+            "2.1.0-rc1",
+            "3.0.0.dev1",
+        ]
+        mock_fetch_raw_versions.return_value = mixed_versions
+        versions = registry.get_versions("testchart")
+
+        assert len(versions) == 2
+        version_strings = [v.version for v in versions]
+        assert version_strings == ["1.0.0", "2.0.0"]

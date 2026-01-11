@@ -3,7 +3,7 @@
 import requests
 import yaml
 
-from helmupdater.chart.chart_version import ChartVersion
+from helmupdater.chart.chart_version import ChartVersion, parse_versions
 
 
 class HTTPRegistry:
@@ -29,19 +29,18 @@ class HTTPRegistry:
         self.name = name
         self.timeout = timeout
 
-    def get_versions(self, chart_name: str) -> list[ChartVersion]:
+    def _fetch_raw_versions(self, chart_name: str) -> list[str]:
         """
-        Fetch index.yaml and extract all versions for a chart.
+        Fetch raw version strings from index.yaml.
 
         Args:
             chart_name: Name of the Helm chart
 
         Returns:
-            List of available chart versions sorted by registry order
+            List of raw version strings
 
         Raises:
-            requests.exceptions.ConnectionError: If registry is unreachable
-            KeyError: If chart is not found in index.yaml
+            ValueError: If chart is not found in index.yaml
         """
         response = requests.get(
             f"{self.base_url}index.yaml",
@@ -54,10 +53,30 @@ class HTTPRegistry:
         if chart_entries is None:
             raise ValueError(f"Chart {chart_name} is not found in the repo.")
 
-        return [
-            ChartVersion(version=entry["version"], repo=self.name, chart=chart_name)
-            for entry in chart_entries
-        ]
+        return [entry["version"] for entry in chart_entries]
+
+    def get_versions(self, chart_name: str) -> list[ChartVersion]:
+        """
+        Fetch index.yaml and extract all versions for a chart.
+
+        Args:
+            chart_name: Name of the Helm chart
+
+        Returns:
+            List of available chart versions
+
+        Raises:
+            requests.exceptions.ConnectionError: If registry is unreachable
+            ValueError: If chart is not found in index.yaml
+            ValueError: If all version entries fail parsing
+        """
+        versions_raw = self._fetch_raw_versions(chart_name)
+        versions = parse_versions(
+            versions_raw,
+            repo_name=self.name,
+            chart_name=chart_name,
+        )
+        return [v for v in versions if v.is_stable]
 
     @property
     def registry_type(self) -> str:
