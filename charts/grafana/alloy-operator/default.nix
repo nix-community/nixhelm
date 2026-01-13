@@ -1,6 +1,6 @@
 {
   repo = "https://grafana.github.io/helm-charts";
   chart = "alloy-operator";
-  version = "0.3.15";
-  chartHash = "sha256-hallQsrgu6gnKE5jxkPEPWUh28R2E0VykcuTw0kXfq0=";
+  version = "0.4.0";
+  chartHash = "sha256-0YfUezYvV14jfWR5X/obbP7FFIsPZV/PRpbiFXvwPhQ=";
 }
