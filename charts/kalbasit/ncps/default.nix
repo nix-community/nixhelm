@@ -1,6 +1,6 @@
 {
   repo = "oci://ghcr.io/kalbasit/helm";
   chart = "ncps";
-  version = "v0.7.0";
-  chartHash = "sha256-BNLX05t7xPvoa9GiDW4KwVLXLvjSfGBVWJLEm29vvtc=";
+  version = "v0.7.2";
+  chartHash = "sha256-V9kriePISaiY1uyWvD1QnIAFWo/nSBl/QwJ1A3mt2SM=";
 }
