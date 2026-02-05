@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-02-05
+
+### helmupdater 0.2.4
+
+#### Fixed
+
+- Fixed wrong version output in commit message in `update-all` action ([#85](https://github.com/nix-community/nixhelm/issues/85))
+
 ## 2026-01-11
 
 ### helmupdater 0.2.3
