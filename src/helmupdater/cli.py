@@ -83,14 +83,14 @@ def update_all(
 
     charts = nix.get_charts()
     for repo_name, repo_charts in charts.items():
-        for chart_name, chart_info in repo_charts.items():
+        for chart_name, current_chart_info in repo_charts.items():
             print(f"checking {repo_name}/{chart_name}")
 
             try:
-                chart.update(
+                new_chart_info = chart.update(
                     repo_name,
                     chart_name,
-                    chart_info=chart_info,
+                    chart_info=current_chart_info,
                 )
 
                 if build:
@@ -98,7 +98,7 @@ def update_all(
                 if commit:
                     git.add_and_commit(
                         chart.get_chart_path(repo_name, chart_name),
-                        f"{repo_name}/{chart_name}: update to {chart_info.version}",
+                        f"{repo_name}/{chart_name}: update to {new_chart_info.version}",
                     )
 
             except Exception as e:
