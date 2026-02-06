@@ -191,7 +191,7 @@ class TestChartCreate:
 
         assert result == chart_metadata
         captured = capsys.readouterr()
-        assert "Failed to update chart" in captured.out
+        assert "failed to update chart to latest version" in captured.out
 
 
 class TestChartUpdate:

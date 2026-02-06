@@ -5,9 +5,12 @@ from pathlib import Path
 import chevron
 
 from helmupdater import git, nix, registry
+from helmupdater.logging import get_logger
 
 from .chart_metadata import ChartMetadata
 from .chart_version import ChartVersion
+
+log = get_logger()
 
 CHART_TEMPLATE = """{
   repo = "{{ repo }}";
@@ -168,9 +171,10 @@ def create(
                     chart_info=chart_info,
                 )
             except Exception as e:
-                print(
-                    f"Failed to update chart {repo_name}/{chart_name} "
-                    f"to latest version. Reason:\n\t{e}"
+                log.warning(
+                    f"{repo_name}/{chart_name}: "
+                    "failed to update chart to latest version",
+                    error=str(e),
                 )
 
     return chart_info
@@ -211,9 +215,12 @@ def update(
         return chart_info
 
     if current_version > latest_version:
-        print("performing version downgrade")
+        log.warning(f"{repo_name}/{chart_name}: performing version downgrade")
 
-    print(f"updating {current_version} -> {latest_version}")
+    log.info(
+        f"{repo_name}/{chart_name}: updating chart version "
+        f"{current_version} -> {latest_version}"
+    )
 
     chart_path = get_chart_path(repo_name, chart_name)
     placeholder_chart_info = chart_info.model_copy(

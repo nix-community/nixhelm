@@ -3,7 +3,10 @@
 from contextlib import contextmanager
 from pathlib import Path
 
+from helmupdater.logging import get_logger
 from helmupdater.utils import run_cmd
+
+log = get_logger()
 
 
 def add_file(file_path: Path | str) -> None:
@@ -54,7 +57,7 @@ def add_and_commit(file_path: Path | str, message: str) -> None:
         ... )
     """
     if not has_changes(file_path):
-        print(f"no changes in {file_path}")
+        log.debug(f"no changes in file {file_path}")
         return
     add_file(file_path)
     commit(message)

@@ -32,8 +32,8 @@ def init(
     repo_name, chart_name = utils.parse_chart_name(name)
 
     if chart.exists(repo_name, chart_name):
-        print("chart already exists")
-        exit(1)
+        log.error(f"{repo_name}/{chart_name}: chart already exists")
+        raise typer.Exit(1)
 
     chart_info = chart.create(repo_name, chart_name, repo_url)
 
@@ -92,7 +92,7 @@ def update_all(
     charts = nix.get_charts()
     for repo_name, repo_charts in charts.items():
         for chart_name, current_chart_info in repo_charts.items():
-            print(f"checking {repo_name}/{chart_name}")
+            log.info(f"{repo_name}/{chart_name}: checking for updates")
 
             try:
                 new_chart_info = chart.update(
@@ -110,7 +110,10 @@ def update_all(
                     )
 
             except Exception as e:
-                print(f"failed to update chart: {e}")
+                log.error(
+                    f"{repo_name}/{chart_name}: failed to update chart",
+                    error=str(e),
+                )
 
 
 @app.command()
