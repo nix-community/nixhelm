@@ -3,8 +3,16 @@
 import typer
 
 from helmupdater import chart, git, nix, utils
+from helmupdater.logging import configure_logging, get_logger
 
+log = get_logger()
 app = typer.Typer(add_completion=False)
+
+
+@app.callback()
+def main() -> None:
+    """Helmupdater - Helm chart version management for Nix."""
+    configure_logging()
 
 
 @app.command()
