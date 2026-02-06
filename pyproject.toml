@@ -1,6 +1,6 @@
 [project]
 name = "helmupdater"
-version = "0.2.4"
+version = "0.2.5"
 description = ""
 authors = [{ name = "Vladimir Pouzanov", email = "farcaller@gmail.com" }]
 maintainers = [{ name = "Damon River", email = "damonriver@fastmail.com" }]

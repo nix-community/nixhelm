@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-02-06
+
+### helmupdater 0.2.5
+
+#### Changed
+
+- Changed logging from `print()` to structlog.
+  - This addresses the issue with output buffering in CI.
+
+#### Added
+
+- Add `-v/--verbose` flag and `LOG_LEVEL` env variable to control logging.
+- Added readme for the helmupdater.
+
 ## 2026-02-05
 
 ### helmupdater 0.2.4
