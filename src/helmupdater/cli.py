@@ -1,5 +1,8 @@
 """Command-line interface for helmupdater."""
 
+import logging
+from typing import Annotated
+
 import typer
 
 from helmupdater import chart, git, nix, utils
@@ -10,9 +13,13 @@ app = typer.Typer(add_completion=False)
 
 
 @app.callback()
-def main() -> None:
+def main(
+    verbose: Annotated[
+        bool, typer.Option("--verbose", "-v", help="Enable debug logging")
+    ] = False,
+) -> None:
     """Helmupdater - Helm chart version management for Nix."""
-    configure_logging()
+    configure_logging(level=logging.DEBUG if verbose else None)
 
 
 @app.command()
