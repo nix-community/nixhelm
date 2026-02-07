@@ -1,6 +1,6 @@
 [project]
 name = "helmupdater"
-version = "0.2.4"
+version = "0.2.5"
 description = ""
 authors = [{ name = "Vladimir Pouzanov", email = "farcaller@gmail.com" }]
 maintainers = [{ name = "Damon River", email = "damonriver@fastmail.com" }]
@@ -13,6 +13,7 @@ dependencies = [
   "pydantic>=2.12.5",
   "pyyaml>=6.0,<7.0",
   "requests>=2.32.2,<3.0",
+  "structlog>=24.0,<26.0",
   "typer>=0.20,<0.21",
 ]
 

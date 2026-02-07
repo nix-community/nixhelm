@@ -191,7 +191,7 @@ class TestChartCreate:
 
         assert result == chart_metadata
         captured = capsys.readouterr()
-        assert "Failed to update chart" in captured.out
+        assert "failed to update chart to latest version" in captured.out
 
 
 class TestChartUpdate:
@@ -340,7 +340,6 @@ class TestRehash:
         _write_chart_file(tmp_path, broken_chart)
 
         mock_get_chart.return_value = broken_chart
-        print(current_chart.chartHash)
         mock_get_hash.return_value = current_chart.chartHash
 
         result = chart.rehash("local", "nginx")
