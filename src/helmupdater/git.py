@@ -120,6 +120,6 @@ def has_changes(file_path: Path | str) -> bool:
         True
     """
     result = run_cmd(
-        "git", "diff", "--quiet", "--exit-code", str(file_path), raise_on_error=False
+        "git", "status", "--porcelain", str(file_path)
     )
-    return result.returncode != 0
+    return result.stdout.strip() != ""
