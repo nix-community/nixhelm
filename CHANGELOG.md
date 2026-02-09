@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-02-09
+
+### helmupdater 0.2.6
+
+#### Fixed
+
+- Fixed how `git.has_changes` handles the check.
+  - This corrects `helmupdater init --commit` issue where commit was not created.
+
 ## 2026-02-06
 
 ### helmupdater 0.2.5
