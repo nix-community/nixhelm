@@ -1,6 +1,6 @@
 {
   repo = "https://charts.bitnami.com/bitnami/";
   chart = "mongodb";
-  version = "18.6.0";
-  chartHash = "sha256-t1hZpB7alV3p4z9gJ+Nb2YBMzKqglwbkY80giNp+Wqc=";
+  version = "18.6.1";
+  chartHash = "sha256-sXZ/ZGCW6gW4y2crOBwXD+x4i2Wg383jpespDTBhMCE=";
 }
