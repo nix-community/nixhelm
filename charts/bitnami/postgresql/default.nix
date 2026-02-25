@@ -1,6 +1,6 @@
 {
   repo = "https://charts.bitnami.com/bitnami/";
   chart = "postgresql";
-  version = "18.4.0";
-  chartHash = "sha256-0o4M/LHpCa0+/ZaXg5qOJVq7E2taGaNzXu7XOvnX640=";
+  version = "18.4.1";
+  chartHash = "sha256-8d20t3s6htIUGI9eDeCn+SiBbO+HM8yXetSXlbYmm7c=";
 }
