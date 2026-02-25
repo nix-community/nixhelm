@@ -1,6 +1,6 @@
 {
   repo = "https://charts.rook.io/release/";
   chart = "rook-ceph";
-  version = "v1.19.1";
-  chartHash = "sha256-xsizvLWaZO6TrNBSX4WeG3Lm+zLpK6L8cF9fS0HDC38=";
+  version = "v1.19.2";
+  chartHash = "sha256-2P9+T4DUm8dco45YNC6i45zeAhVTnsRPDlZz8N9TmgI=";
 }
