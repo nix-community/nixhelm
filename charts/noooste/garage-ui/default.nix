@@ -1,6 +1,6 @@
 {
   repo = "https://helm.noste.dev/";
   chart = "garage-ui";
-  version = "0.1.13";
-  chartHash = "sha256-rj2XtqRnIukcmzxdZ62IJqQyMc2veegY2MpzmEiqdow=";
+  version = "0.2.0";
+  chartHash = "sha256-fdMz6AZVDMF78Z1vteMeVvRomQES7iroehg8R/IRR14=";
 }
