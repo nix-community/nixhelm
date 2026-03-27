@@ -1,6 +1,6 @@
 {
   repo = "oci://ghcr.io/openclaw-rocks/charts";
   chart = "openclaw-operator";
-  version = "0.24.0";
-  chartHash = "sha256-khAr8w9jd7K/2HpluM6uYBKcrClqZObZ1fP3xaqRIpQ=";
+  version = "0.24.1";
+  chartHash = "sha256-8DuMCfoG/ZieOYwBX2QzinEqUgrvoNRX9+o9S2BMKn8=";
 }
