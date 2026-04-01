@@ -1,6 +1,6 @@
 {
   repo = "https://immich-app.github.io/immich-charts/";
   chart = "immich";
-  version = "0.11.0";
-  chartHash = "sha256-DIJEe6Q1V/NCCQtkTKz1RyijnxHJvntXHA7z3lsCYW0=";
+  version = "0.11.1";
+  chartHash = "sha256-d0N+3T+bFVYnJ1xvO94SRTecqVWovhi/KbMA0wJ+LzU=";
 }
