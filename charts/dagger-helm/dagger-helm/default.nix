@@ -1,6 +1,6 @@
 {
   repo = "oci://registry.dagger.io";
   chart = "dagger-helm";
-  version = "0.20.5";
-  chartHash = "sha256-oO54mLtl+b3inIH+AbUHKgtXwwQmylD5w7cTpODd200=";
+  version = "0.20.6";
+  chartHash = "sha256-Mpv/RUU7heC3G8qn5kujmWF4lUZABoBaE6b9BdvQf2c=";
 }
