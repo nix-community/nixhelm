@@ -1,6 +1,6 @@
 {
   repo = "https://metallb.github.io/metallb/";
   chart = "metallb";
-  version = "0.15.3";
-  chartHash = "sha256-KWdVaF6CjFjeHQ6HT1WvkI9JnSurt9emLVCpkxma0fg=";
+  version = "0.16.0";
+  chartHash = "sha256-rbOhBugpWX4ONiAr3EW4UpCUf2QlHJ6WivC6KVzqDqc=";
 }
