@@ -1,6 +1,6 @@
 {
   repo = "https://bitnami-labs.github.io/sealed-secrets/";
   chart = "sealed-secrets";
-  version = "2.18.5";
-  chartHash = "sha256-MO139oUgyefscxmJmkUpKlS/kC9a3t5rQ6CW4Oj6D20=";
+  version = "2.18.6";
+  chartHash = "sha256-UU9mdf65anGaqkCv31oLRFVbfKxoX/un29PAgfAJS8k=";
 }
