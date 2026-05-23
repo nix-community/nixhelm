@@ -1,6 +1,6 @@
 {
   repo = "https://charts.goauthentik.io/";
   chart = "authentik";
-  version = "2026.2.3";
-  chartHash = "sha256-kGkCRdvabiyi5fGyeBUEd+fw+QDwtJf5IAdKwmnZxRM=";
+  version = "2026.5.0";
+  chartHash = "sha256-Uy60OqbGJEaNioHg+f4tcq0JfT0duQun18qrQuZIlFo=";
 }
