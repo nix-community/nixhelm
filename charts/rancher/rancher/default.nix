@@ -1,6 +1,6 @@
 {
   repo = "https://releases.rancher.com/server-charts/stable/";
   chart = "rancher";
-  version = "2.14.1";
-  chartHash = "sha256-zJoai655UKILWS+7WXLnJxTs6aN0mTB+CN8tp5ds880=";
+  version = "2.14.2";
+  chartHash = "sha256-II8OXchUgaXndNQhB1AsS/mNXjr/bGuuB+10X4V5S1w=";
 }
