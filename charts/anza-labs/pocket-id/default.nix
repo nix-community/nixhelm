@@ -1,6 +1,6 @@
 {
   repo = "https://anza-labs.github.io/charts";
   chart = "pocket-id";
-  version = "2.1.1";
-  chartHash = "sha256-m3QFdPESf0Hpx22UaBHufTESKNNq35JPK3ii8zTp4DU=";
+  version = "2.1.3";
+  chartHash = "sha256-5CQ12Jqolh4+rnDjMtoebqA+ri0a/ZGmxzC6o9F7vBc=";
 }
