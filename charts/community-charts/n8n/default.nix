@@ -1,6 +1,6 @@
 {
   repo = "https://community-charts.github.io/helm-charts";
   chart = "n8n";
-  version = "1.23.4";
-  chartHash = "sha256-+al/djw8AvBZRCAmgEW1H94JwO3NmcFpLp0smpDkSME=";
+  version = "1.24.0";
+  chartHash = "sha256-EX6YdLKGYLTBbwh0+wir79BdPsIujF+E7ZnhGcKdpYU=";
 }
