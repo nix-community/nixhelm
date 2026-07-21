@@ -2,6 +2,26 @@
 
 This is a collection of helm charts in a nix-digestible format.
 
+## Background
+
+A short overview for those unfamiliar with the tools involved.
+
+- [Kubernetes](https://kubernetes.io) applications are described by YAML
+  manifests: deployments, services, config maps and so on. A single application
+  usually needs a lot of them.
+- [Helm](https://helm.sh) is a package manager for Kubernetes. A chart is a set of
+  templated manifests plus a `values.yaml` of settings, which Helm renders into the
+  YAML applied to a cluster. Charts are published to chart repositories.
+- [Nix](https://nixos.org) builds from pinned, hash-checked inputs, so a build
+  produces the same result on any machine. `helm repo update` gives no such
+  guarantee, it moves to whatever version the repository serves at that moment.
+- **nixhelm** stores chart versions and hashes in `charts/`, which makes a chart a
+  regular nix input. Pinning nixhelm pins every chart in use. Versions are refreshed
+  nightly, so updates arrive as commits to pull rather than at deploy time.
+- nixhelm itself only provides the charts. Rendering them into manifests is done by
+  [nix-kube-generators](https://github.com/farcaller/nix-kube-generators) at build
+  time, see [Usage](#usage) below.
+
 ## Supported chart repositories
 
 Nixhelm supports both traditional HTTP helm chart repositories and OCI-compliant registries:
