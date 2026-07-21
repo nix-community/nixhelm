@@ -1,5 +1,5 @@
 {
-  description = "A collection of kubernetes helm charts in a nix-digestable format.";
+  description = "A collection of kubernetes helm charts in a nix-digestible format.";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
