@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-07-20
+
+### General
+
+- Updated flake inputs.
+
+### helmupdater 0.2.7
+
+#### Changed
+
+- Updated dependencies.
+
+#### Fixed
+
+- Fixed failing test for `git.add_and_commit`.
+
 ## 2026-02-09
 
 ### helmupdater 0.2.6
