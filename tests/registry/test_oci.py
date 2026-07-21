@@ -19,7 +19,8 @@ class TestOCIRegistry:
     """Test OCI registry with local instance."""
 
     @pytest.fixture(scope="class")
-    def oci_registry(self):
+    @staticmethod
+    def oci_registry():
         return OCIRegistry(REGISTRY_URL, REGISTRY_NAME, insecure=True)
 
     def test_initialization(self, oci_registry):
