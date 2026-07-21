@@ -34,13 +34,27 @@ class TestCommit:
 
 
 class TestAddAndCommit:
+    @patch("helmupdater.git.has_changes", return_value=True)
     @patch("helmupdater.git.commit")
     @patch("helmupdater.git.add_file")
-    def test_add_and_commit(self, mock_add_file, mock_commit):
+    def test_add_and_commit(self, mock_add_file, mock_commit, mock_has_changes):
         git.add_and_commit("charts/local/nginx/default.nix", "Update nginx")
 
+        mock_has_changes.assert_called_once_with("charts/local/nginx/default.nix")
         mock_add_file.assert_called_once_with("charts/local/nginx/default.nix")
         mock_commit.assert_called_once_with("Update nginx")
+
+    @patch("helmupdater.git.has_changes", return_value=False)
+    @patch("helmupdater.git.commit")
+    @patch("helmupdater.git.add_file")
+    def test_add_and_commit_skips_when_unchanged(
+        self, mock_add_file, mock_commit, mock_has_changes
+    ):
+        git.add_and_commit("charts/local/nginx/default.nix", "Update nginx")
+
+        mock_has_changes.assert_called_once_with("charts/local/nginx/default.nix")
+        mock_add_file.assert_not_called()
+        mock_commit.assert_not_called()
 
 
 class TestReset:
