@@ -24,13 +24,13 @@ A short overview for those unfamiliar with the tools involved.
 
 ## Supported chart repositories
 
-Nixhelm supports both traditional HTTP helm chart repositories and OCI-compliant registries:
+nixhelm supports both traditional HTTP helm chart repositories and OCI-compliant registries:
 
 - **HTTP/HTTPS repositories** (ChartMuseum, traditional Helm repos)
 - **OCI registries** (GitHub Container Registry, Docker Hub, Harbor, etc.)
 
 If your chart is hosted in a git repo, remember that you can fetch it as a flake
-input and pass to `buildHelmChart` [directly](https://github.com/farcaller/nixhelm/issues/10).
+input and pass to `buildHelmChart` [directly](https://github.com/nix-community/nixhelm/issues/10).
 
 ## Outputs
 
@@ -52,19 +52,19 @@ The charts are updated nightly.
 nix build .#chartsDerivations.x86_64-linux."argoproj"."argo-cd"
 ```
 
-Will download the Argo CD helm chart to `result/`.
+This will download the Argo CD helm chart to `result/`.
 
 To build a chart, you should use the kube generators from
 [github:farcaller/nix-kube-generators](https://github.com/farcaller/nix-kube-generators),
-and just pass your chart to the `buildCharts` function. So for example to render
+and just pass your chart to the `buildHelmChart` function. So for example to render
 the Argo CD chart:
 
 ```nix
-      argo = (kubelib.buildHelmChart {
-        name = "argo";
-        chart = (nixhelm.charts { inherit pkgs; }).argoproj.argo-cd;
-        namespace = "argo";
-      });
+argo = (kubelib.buildHelmChart {
+  name = "argo";
+  chart = (nixhelm.charts { inherit pkgs; }).argoproj.argo-cd;
+  namespace = "argo";
+});
 ```
 
 If you want to use this setup within Argo CD, check out [cake](https://github.com/farcaller/cake).
@@ -73,21 +73,21 @@ If you want to use this setup within Argo CD, check out [cake](https://github.co
 
 This repository and all the charts within are publicly cached at `cachix` as
 [nixhelm](https://app.cachix.org/cache/nixhelm). Here's how you can quickly
-enable it in your nix installation:
+enable it in your nix installation.
 
-### Without flakes
+Install cachix, either without flakes:
 
 ```sh
 nix-env -iA cachix -f https://cachix.org/api/v1/install
 ```
 
-### With flakes
+or with flakes:
 
 ```sh
 nix profile install nixpkgs#cachix
 ```
 
-### Then enable the cache
+Then enable the cache:
 
 ```sh
 cachix use nixhelm
@@ -109,7 +109,7 @@ nix run .#helmupdater -- init $REPO $REPO_NAME/$CHART_NAME --commit
 ```
 
 Where `REPO` is the URL to the chart repository, `REPO_NAME` is the short name for the
-repository and the `CHART_NAME` is the name of the chart in the repository.
+repository and `CHART_NAME` is the name of the chart in the repository.
 
 ### HTTP Repository Example
 
