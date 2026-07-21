@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-07-21
+
+### helmupdater 0.2.8
+
+#### Changed
+
+- Updated pytest version, addressed deprecations in test suite.
+
 ## 2026-07-20
 
 ### General

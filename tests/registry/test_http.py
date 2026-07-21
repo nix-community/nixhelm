@@ -19,7 +19,8 @@ class TestHTTPRegistry:
     """Test HTTP registry with local instance."""
 
     @pytest.fixture(scope="class")
-    def http_registry(self):
+    @staticmethod
+    def http_registry():
         return HTTPRegistry(REGISTRY_URL, REGISTRY_NAME)
 
     def test_initialization(self, http_registry):

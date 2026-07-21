@@ -1,6 +1,6 @@
 [project]
 name = "helmupdater"
-version = "0.2.7"
+version = "0.2.8"
 description = ""
 authors = [{ name = "Vladimir Pouzanov", email = "farcaller@gmail.com" }]
 maintainers = [{ name = "Damon River", email = "damonriver@fastmail.com" }]
@@ -19,7 +19,7 @@ dependencies = [
 
 [dependency-groups]
 dev = ["ty>=0.0.2"]
-test = ["pytest>=7.0,<8.0", "pytest-cov>=4.0,<5.0"]
+test = ["pytest>=7.0", "pytest-cov>=4.0"]
 
 [project.scripts]
 helmupdater = "helmupdater.cli:app"
