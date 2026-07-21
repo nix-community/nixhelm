@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-07-21
 
+### General
+
+#### Added
+
+- Added some background context to README as per [#105](https://github.com/nix-community/nixhelm/issues/105).
+
+#### Fixed
+
+- Corrected minor structure inconsistencies in CHANGELOG.
+
 ### helmupdater 0.2.8
 
 #### Changed
@@ -13,6 +23,8 @@ All notable changes to this project will be documented in this file.
 ## 2026-07-20
 
 ### General
+
+#### Changed
 
 - Updated flake inputs.
 
@@ -39,15 +51,15 @@ All notable changes to this project will be documented in this file.
 
 ### helmupdater 0.2.5
 
+#### Added
+
+- Added `-v/--verbose` flag and `LOG_LEVEL` env variable to control logging.
+- Added readme for the helmupdater.
+
 #### Changed
 
 - Changed logging from `print()` to structlog.
   - This addresses the issue with output buffering in CI.
-
-#### Added
-
-- Add `-v/--verbose` flag and `LOG_LEVEL` env variable to control logging.
-- Added readme for the helmupdater.
 
 ## 2026-02-05
 
@@ -55,7 +67,7 @@ All notable changes to this project will be documented in this file.
 
 #### Fixed
 
-- Fixed wrong version output in commit message in `update-all` action ([#85](https://github.com/nix-community/nixhelm/issues/85))
+- Fixed wrong version output in commit message in `update-all` action ([#85](https://github.com/nix-community/nixhelm/issues/85)).
 
 ## 2026-01-11
 
@@ -72,23 +84,6 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-01-08
 
-### helmupdater 0.2.2
-
-#### Fixed
-
-- Fixed chart version parsing.
-- Fixed exception handling in `update-all` command.
-
-#### Changed
-
-- Changed chart version parsing from `semver` to `packaging.version` as it is more permissive.
-
-### helmupdater 0.2.1
-
-#### Fixed
-
-- Fixed an error with running "git commit" on no changes. Now empty changes are skipped.
-
 ### General
 
 #### Added
@@ -101,19 +96,36 @@ All notable changes to this project will be documented in this file.
 - `flake.nix`: Switched from `poetry2nix` to `uv2nix` (`poetry2nix` is currently unmaintained).
 - Updated existing GitHub actions with the changes introduced in `helmupdater`.
 
+### helmupdater 0.2.2
+
+#### Changed
+
+- Changed chart version parsing from `semver` to `packaging.version` as it is more permissive.
+
+#### Fixed
+
+- Fixed chart version parsing.
+- Fixed exception handling in `update-all` command.
+
+### helmupdater 0.2.1
+
+#### Fixed
+
+- Fixed an error with running "git commit" on no changes. Now empty changes are skipped.
+
 ### helmupdater 0.2.0
 
 This is a complete rewrite of the `helmupdater` in a modular way.
 
 #### Breaking Changes
 
-- CLI options changed
-  - `--rebuild` is renamed to `--build`
+- CLI options changed:
+  - `--rebuild` is renamed to `--build`.
   - `--rehash_only` has been removed in favor of a separate `rehash` command.
 
 #### Added
 
-- Added support of OCI registries (🎉 [#1](https://github.com/nix-community/nixhelm/issues/1))
+- Added support of OCI registries (🎉 [#1](https://github.com/nix-community/nixhelm/issues/1)).
 - Added registry services for end-to-end testing (see `tests/_infra`).
 - Added test coverage.
 - New CLI command: `build` to build a nix derivation.
