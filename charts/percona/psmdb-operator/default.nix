@@ -1,6 +1,6 @@
 {
   repo = "https://percona.github.io/percona-helm-charts";
   chart = "psmdb-operator";
-  version = "1.22.0";
-  chartHash = "sha256-1jzQEl5nJOhpd4oMl9f4Ttxvl7gEk+F3oJF8ro8mqws=";
+  version = "1.23.0";
+  chartHash = "sha256-QniBIwkHI1pvZSfFooZhVpxGFpfzk78dQOyeGQ0Oy9Y=";
 }
