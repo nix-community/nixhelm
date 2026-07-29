@@ -1,6 +1,6 @@
 {
   repo = "https://charts.redpanda.com/";
   chart = "redpanda";
-  version = "26.1.9";
-  chartHash = "sha256-UV0O0JQoqMFlvLJJ4fV1jh48MqJRgKDfDN80KNnOSgI=";
+  version = "26.2.1";
+  chartHash = "sha256-oodfiwHHJcyXS3oFajqbOJtE9U9fpu4txMJsupKTRpk=";
 }
