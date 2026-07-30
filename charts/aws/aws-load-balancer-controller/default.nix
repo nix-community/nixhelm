@@ -1,6 +1,6 @@
 {
   repo = "https://aws.github.io/eks-charts";
   chart = "aws-load-balancer-controller";
-  version = "3.4.2";
-  chartHash = "sha256-Z+dB+rFKEpdAjtAzyzzr9VxaX3dkuzJ0/zE/88Z4ogs=";
+  version = "3.4.3";
+  chartHash = "sha256-CrDcuPhG6a2HPoP9NDqQWWd1NJqlKKQ72XviAhmH394=";
 }
