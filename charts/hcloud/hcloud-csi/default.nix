@@ -1,6 +1,6 @@
 {
   repo = "https://charts.hetzner.cloud";
   chart = "hcloud-csi";
-  version = "2.22.0";
-  chartHash = "sha256-Bnvg/W6l+Ky4DEmej1h8a/z2JRay3tBkZSletGtVgqo=";
+  version = "2.22.1";
+  chartHash = "sha256-eMriIt3vjT2WqfJYdtG4afkC4s4uRhczor/lWAh0V0E=";
 }
