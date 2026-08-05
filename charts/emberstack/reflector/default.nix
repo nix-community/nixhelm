@@ -1,6 +1,6 @@
 {
   repo = "https://emberstack.github.io/helm-charts/";
   chart = "reflector";
-  version = "10.0.62";
-  chartHash = "sha256-AJyEFvah7weFqfIuUm1QNNW1CVbQnHP1BJtV+NHMwPk=";
+  version = "10.0.63";
+  chartHash = "sha256-ipaFu2TxSNAayDpU3Nj5auNfWqtDqCs1iX35D5vfk0M=";
 }
