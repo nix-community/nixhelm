@@ -1,6 +1,6 @@
 {
   repo = "https://stakater.github.io/stakater-charts/";
   chart = "reloader";
-  version = "2.2.14";
-  chartHash = "sha256-kZU0Qdf959SbMOJLCuUrjM1mtYbtv+gfttVi17ZCZo0=";
+  version = "2.2.15";
+  chartHash = "sha256-FBYy3IMVhDV4cAhA1eY3UxJ9BrI24b+DTEqkmquSMUo=";
 }
