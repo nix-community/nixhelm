@@ -71,3 +71,27 @@ class TestOCIRegistry:
         assert len(versions) == 2
         version_strings = [v.version for v in versions]
         assert version_strings == ["1.0.0", "2.0.0"]
+
+    @patch.object(OCIRegistry, "_fetch_raw_versions")
+    def test_get_versions_filters_bad_tags(self, mock_fetch_raw_versions):
+        """Test that get_versions excludes bad tags."""
+        registry = OCIRegistry("oci://example.com/charts", "test")
+
+        mixed_versions = [
+            # bad tags
+            "v0-eff4321d9b52b38eb0be8061fe76adf5cf20a185",
+            "sha256-199866c04a14b6769c9d98fe9647a861cd49f296b35b8dcc585650e0d4d27f04.sig",
+            "20221129",
+            "20221003",
+            "2.0",
+            # valid tags
+            "1.11.1",
+            "1.0.10",
+            "v0.34.7",
+        ]
+        mock_fetch_raw_versions.return_value = mixed_versions
+        versions = registry.get_versions("testchart")
+
+        version_strings = {v.version for v in versions}
+        assert version_strings == {"1.11.1", "1.0.10", "v0.34.7"}
+        assert max(versions).version == "1.11.1"
