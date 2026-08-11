@@ -8,6 +8,9 @@ from oras.client import OrasClient
 
 from helmupdater.chart.chart_version import ChartVersion, parse_versions
 
+# Require version to have a minimal number of components. Following semver.
+MIN_VERSION_COMPONENTS = 3
+
 
 @contextmanager
 def _timeout(seconds: int = 5):
@@ -107,7 +110,11 @@ class OCIRegistry:
             repo_name=self.name,
             chart_name=chart_name,
         )
-        return [v for v in versions if v.is_stable]
+        return [
+            v
+            for v in versions
+            if v.is_stable and len(v.version_info.release) >= MIN_VERSION_COMPONENTS
+        ]
 
     @property
     def registry_type(self) -> str:
