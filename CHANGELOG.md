@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-08-11
+
+### helmupdater 0.2.9
+
+#### Changed
+
+- Filter dummy tags in OCI repositories [#123](https://github.com/nix-community/nixhelm/issues/123).
+
 ## 2026-07-21
 
 ### General
