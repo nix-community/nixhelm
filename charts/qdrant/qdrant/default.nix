@@ -1,6 +1,6 @@
 {
   repo = "https://qdrant.github.io/qdrant-helm";
   chart = "qdrant";
-  version = "1.18.2";
-  chartHash = "sha256-bG77k6AkKJuwOFPoWQg4AEE/KmPoaunrOuPTseEMKD8=";
+  version = "1.19.0";
+  chartHash = "sha256-2kf1fCv5RChW9XPPMkQLf7wKzKpy4uJwUG2ebfmwdhQ=";
 }
