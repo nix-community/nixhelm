@@ -1,6 +1,6 @@
 {
   repo = "https://istio-release.storage.googleapis.com/charts/";
   chart = "cni";
-  version = "1.30.3";
-  chartHash = "sha256-YsKQ72uOiDCDICLUCWYT1PW+4nffuHDeIdg0fDZrfgI=";
+  version = "1.30.4";
+  chartHash = "sha256-wt5DtqGaaWjSB+gH8W9RDGzs6Ned2i1LzW6NwPYeQHw=";
 }
