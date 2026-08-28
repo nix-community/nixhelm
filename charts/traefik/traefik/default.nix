@@ -1,6 +1,6 @@
 {
   repo = "https://traefik.github.io/charts/";
   chart = "traefik";
-  version = "41.3.0";
-  chartHash = "sha256-pGDOxl9svr28aZiZ7UQX0pR6TzwZFkf+xVXYJyzh+vU=";
+  version = "41.4.0";
+  chartHash = "sha256-xcmiiZx4mtg92ojH6khzSq9Dl/rt8HPw9GHcyWLSUIg=";
 }
