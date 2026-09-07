@@ -1,6 +1,6 @@
 {
   repo = "oci://ghcr.io/paperclipinc/charts";
   chart = "openclaw-operator";
-  version = "0.39.0";
-  chartHash = "sha256-ZGZuWbZN8EeJJMVGflgewipZJlSd9Hguwjem6420uhY=";
+  version = "0.40.0";
+  chartHash = "sha256-26nEDNrXX1q/L2QTZkG97f0WZ4IyNlM/1tk7zk0PUfw=";
 }
