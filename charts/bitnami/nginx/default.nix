@@ -1,6 +1,6 @@
 {
   repo = "https://charts.bitnami.com/bitnami/";
   chart = "nginx";
-  version = "25.2.0";
-  chartHash = "sha256-aO1FwbxmMC7NLHeopQaEhv0eQniW3T7cczG8L50/MIU=";
+  version = "25.2.1";
+  chartHash = "sha256-hn/RHVcaQbGYWedaScWfO2RWli3dq1D0J3J17m5eKTo=";
 }
