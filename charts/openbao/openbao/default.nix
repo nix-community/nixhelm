@@ -1,6 +1,6 @@
 {
   repo = "https://openbao.github.io/openbao-helm/";
   chart = "openbao";
-  version = "0.30.3";
-  chartHash = "sha256-VTKVdnmwAybBDc+jiB8eoXNYevdVWzY1wVPoAifJSls=";
+  version = "0.30.4";
+  chartHash = "sha256-/Jp9Cw0FlQUSyEfy8DcSJOra7h9SDpBWRWD0ur8oj40=";
 }
