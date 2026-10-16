@@ -1,6 +1,6 @@
 {
   repo = "https://kubernetes-sigs.github.io/headlamp";
   chart = "headlamp";
-  version = "0.45.0";
-  chartHash = "sha256-hJKCelyNZiOT9DckD+UOpCVWNMsxH5y+V9If376TNx4=";
+  version = "0.46.0";
+  chartHash = "sha256-Jw7KWHrHKnRnMXub2CGeEIYty9yZdwf+WbjDOZurtUM=";
 }
