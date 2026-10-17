@@ -1,6 +1,6 @@
 {
   repo = "https://helm.goharbor.io/";
   chart = "harbor";
-  version = "1.19.2";
-  chartHash = "sha256-otgAUxUlx9iSCfGj9hcyZaAsBwx6fz9iZcEzyWX2jRU=";
+  version = "1.19.4";
+  chartHash = "sha256-Z++2NEk4GGCbU2vgjIKpCTqz5v6AOcYwj2gzwleOVQk=";
 }
