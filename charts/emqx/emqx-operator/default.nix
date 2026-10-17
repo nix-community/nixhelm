@@ -1,6 +1,6 @@
 {
   repo = "https://repos.emqx.io/charts/";
   chart = "emqx-operator";
-  version = "2.3.3";
-  chartHash = "sha256-0yuwHPl9YVzVMSmUa05oEFL5rr/7c+LEbjhp5Lom/To=";
+  version = "3.0.0";
+  chartHash = "sha256-NZIAhlX2/Km8Q1Hslu0bbL9NTlIhfKpkEMJNlFRibv8=";
 }
