@@ -1,6 +1,6 @@
 {
   repo = "https://karakeep-app.github.io/helm-charts/";
   chart = "karakeep";
-  version = "0.33.1";
-  chartHash = "sha256-e3+7n4MfjKP9KTZ+jLrkT00HLwPpVzlPbZXb6NsoIPk=";
+  version = "0.34.1";
+  chartHash = "sha256-fmlAId/gVHBph9pOX/gV0ySUrKwwZkSgDTeLMgytTAE=";
 }
