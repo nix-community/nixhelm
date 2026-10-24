@@ -1,6 +1,6 @@
 {
   repo = "https://charts.bitnami.com/bitnami/";
   chart = "valkey";
-  version = "6.3.4";
-  chartHash = "sha256-bwnh+zM4zLKw2lOOvWpQtZDBKyQ1LO5Rg2IR+Nswd1Q=";
+  version = "6.3.12";
+  chartHash = "sha256-aC0y39p0FdSB6EdjAUbmD7NmRLa8THaG0dlRW09JGoo=";
 }
