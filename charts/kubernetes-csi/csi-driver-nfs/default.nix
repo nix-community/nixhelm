@@ -1,6 +1,6 @@
 {
   repo = "https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts/";
   chart = "csi-driver-nfs";
-  version = "4.13.5";
-  chartHash = "sha256-Zthiw9oL0IYU9F/QNQSw0x6ADsZUQivGc8GaqIiYc/g=";
+  version = "4.13.6";
+  chartHash = "sha256-Jo+CAS71yjqKT2oJQgQdYj10V8cDcqaVG2fYKBWln9A=";
 }
