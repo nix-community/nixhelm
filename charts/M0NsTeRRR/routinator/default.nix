@@ -1,6 +1,6 @@
 {
   repo = "oci://ghcr.io/m0nsterrr/helm-charts";
   chart = "routinator";
-  version = "2.4.0";
-  chartHash = "sha256-upCrCgMN2U9O4H9h82RxWfIlhDgTMskhcFIyMyNOWmA=";
+  version = "2.5.0";
+  chartHash = "sha256-f5FZyIr5/C/3RERkxmkKjjeuKridgdeAVRJ+hwU7jWE=";
 }
