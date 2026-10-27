@@ -1,6 +1,6 @@
 {
   repo = "https://charts.hetzner.cloud/";
   chart = "hcloud-cloud-controller-manager";
-  version = "1.39.1";
-  chartHash = "sha256-VJ4/0RLKB4QvR6aXzxhjq6gpf6pwLyfiPfJg4EnPuLw=";
+  version = "1.39.2";
+  chartHash = "sha256-PAUsRMNazoVqqXAjBw1plFoR5erCWzu3YiA69YCl3Ks=";
 }
