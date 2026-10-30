@@ -1,6 +1,6 @@
 {
   repo = "https://aquasecurity.github.io/helm-charts/";
   chart = "trivy-operator";
-  version = "0.37.0";
-  chartHash = "sha256-/JGz8v/Jef+UcdgKm1u6hnvo5u+ImUm7uasdcqV34lo=";
+  version = "0.38.1";
+  chartHash = "sha256-TT1wconGBbGbZlHRmyVui1IGJvgM6vTwCQaGcXGA0PI=";
 }
