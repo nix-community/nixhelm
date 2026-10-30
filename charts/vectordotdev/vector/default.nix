@@ -1,6 +1,6 @@
 {
   repo = "oci://ghcr.io/vectordotdev/helm-charts";
   chart = "vector";
-  version = "0.60.0";
-  chartHash = "sha256-O9CBNwYOxMUyXg31p1SDqctALa4y1vY0FlWU1/QD1wU=";
+  version = "0.61.0";
+  chartHash = "sha256-L54IBL8s3oaRF66zb7APqvaZ4l50q/a/kgOV6w+a4eY=";
 }
