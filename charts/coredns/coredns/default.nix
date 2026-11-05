@@ -1,6 +1,6 @@
 {
   repo = "https://coredns.github.io/helm";
   chart = "coredns";
-  version = "1.50.0";
-  chartHash = "sha256-S/ry+4OEGovH+4DrUTXuvgqN0i4yunjPory1j66zxVI=";
+  version = "1.50.1";
+  chartHash = "sha256-grXgSyO/OANm3Ue24/NuDOUXgiucBi10CmzveUL3/2M=";
 }
