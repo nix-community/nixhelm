@@ -1,6 +1,6 @@
 {
   repo = "https://charts.zitadel.com/";
   chart = "zitadel";
-  version = "10.4.0";
-  chartHash = "sha256-jmTFurXDKUASi7TsDBP8ISeJP6O2p4/zLSlbA1GkT84=";
+  version = "10.5.0";
+  chartHash = "sha256-SqIymx2evD2X8afcLXkRjLf68s09FESMmFPq2/+d1hc=";
 }
