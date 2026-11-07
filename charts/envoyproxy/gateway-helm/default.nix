@@ -1,6 +1,6 @@
 {
   repo = "oci://registry-1.docker.io/envoyproxy";
   chart = "gateway-helm";
-  version = "1.9.3";
-  chartHash = "sha256-PAMhV2B9e2K1l8Ok6A8bTZBdBQAl1cMXv4+dflZGo0w=";
+  version = "1.10.0";
+  chartHash = "sha256-y6fx1Q9FgO6UUAY245XGKoPkn4Acmg6bGPFbFfu1g4o=";
 }
