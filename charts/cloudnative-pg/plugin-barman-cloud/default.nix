@@ -1,6 +1,6 @@
 {
   repo = "https://cloudnative-pg.io/charts";
   chart = "plugin-barman-cloud";
-  version = "0.8.1";
-  chartHash = "sha256-Zp6HKGx0o5vF7lGXQwKvIypTSPEZbp7Z4lwTVT9TZiA=";
+  version = "0.9.0";
+  chartHash = "sha256-GXcy2CI4iRhzVVy3vcv2ktYaXchYJCF2zODMx5/oPKk=";
 }
