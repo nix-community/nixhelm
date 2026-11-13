@@ -1,6 +1,6 @@
 {
   repo = "oci://public.ecr.aws/karpenter";
   chart = "karpenter";
-  version = "1.15.1";
-  chartHash = "sha256-cichqpy3UI/eleOaEiFwP0NMfyHF97oU5t3d4F745PM=";
+  version = "1.15.2";
+  chartHash = "sha256-jZ2Um6akwUWiYK8ApOyIxLMrycyAZkBSn33i0nNhOsY=";
 }
